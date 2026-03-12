@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mohammad Ahsan — Python Developer & Data Analyst</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;padding:0 3rem;gap:3rem;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;right:-180px;top:50%;transform:translateY(-50%);
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,168,67,.07) 0%,transparent 65%);
+  animation:pulse 5s ease-in-out infinite;pointer-events:none;
+}
+.hero-line{
+  width:1px;height:100%;background:linear-gradient(to bottom,transparent,var(--gold),transparent);
+  position:absolute;left:50%;opacity:.12;
+}
+/* hero text */
+.hero-greeting{
+  font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.4rem;
+  animation:fadeInDown .8s ease both .2s;
+}
+.hero-name{
+  font-family:var(--ff-display);font-size:clamp(3rem,6.5vw,5.8rem);font-weight:700;
+  line-height:1.02;color:var(--text);
+  animation:fadeInDown .8s ease both .35s;
+}
+.hero-name .italic{
+  font-style:italic;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));
+  background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;animation:shimmer 3s linear infinite;
+}
+.hero-role{
+  font-size:1rem;color:var(--muted);margin:1.6rem 0 2.2rem;
+  line-height:1.8;animation:fadeInDown .8s ease both .5s;
+}
+.hero-role strong{color:var(--text);font-weight:500;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeInDown .8s ease both .65s;}
+
+/* hero image */
+.hero-img-wrap{
+  position:relative;display:flex;justify-content:center;align-items:center;
+  animation:scaleIn .9s ease both .4s;
+}
+.img-orbit{
+  position:absolute;width:calc(100% + 60px);height:calc(100% + 60px);
+  border:1px dashed rgba(212,168,67,.18);border-radius:50%;
+  animation:orbit 20s linear infinite;
+}
+.img-orbit::before{
+  content:'';position:absolute;top:-5px;left:50%;width:10px;height:10px;
+  background:var(--gold);border-radius:50%;transform:translateX(-50%);
+  box-shadow:0 0 12px var(--gold);
+}
+.img-frame{
+  width:360px;height:440px;position:relative;
+  border:1px solid rgba(212,168,67,.2);
+  overflow:hidden;
+  animation:float 7s ease-in-out infinite;
+  animation-delay:.3s;
+}
+.img-frame::before{
+  content:'';position:absolute;inset:-1px;
+  border:1px solid rgba(212,168,67,.08);transform:rotate(4deg);pointer-events:none;z-index:2;
+}
+.img-frame img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  filter:contrast(1.05) saturate(.92);display:block;
+}
+.img-badge{
+  position:absolute;bottom:-18px;right:-18px;
+  width:88px;height:88px;border-radius:50%;
+  background:var(--gold);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  font-family:var(--ff-mono);font-size:.52rem;letter-spacing:.08em;
+  color:var(--bg);font-weight:500;text-transform:uppercase;
+  animation:orbit 12s linear infinite reverse;z-index:3;
+  line-height:1.4;
+}
+.scroll-cue{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.2em;color:var(--muted);
+  animation:fadeInDown .8s ease both 1.2s;
+}
+.scroll-cue .line{
+  width:1px;height:48px;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+  animation:pulse 2s ease-in-out infinite;
+}
+
+/* ── ABOUT BAND ── */
+.band{padding:5rem 3rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.band-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:center;}
+.band-text p{font-size:1rem;color:var(--muted);line-height:1.85;margin-bottom:1rem;}
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.stat-box{
+  padding:1.8rem;border:1px solid var(--border);background:var(--bg3);text-align:center;
+  transition:border-color .3s;
+}
+.stat-box:hover{border-color:var(--border2);}
+.stat-num{
+  font-family:var(--ff-display);font-size:3rem;font-weight:700;
+  color:var(--gold);line-height:1;
+}
+.stat-label{
+  font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);margin-top:.5rem;
+}
+
+/* ── SKILLS PREVIEW ── */
+.skills-section{padding:5rem 3rem;}
+.skills-section-inner{max-width:1200px;margin:0 auto;}
+.pills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem;margin-top:2.5rem;}
+.pill{
+  display:flex;align-items:center;gap:.7rem;padding:.9rem 1.1rem;
+  border:1px solid var(--border);background:var(--bg2);
+  font-family:var(--ff-mono);font-size:.72rem;color:var(--text);
+  transition:all .25s;cursor:default;
+}
+.pill:hover{border-color:var(--gold);color:var(--gold);background:var(--glow);transform:translateX(4px);}
+.pill-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:2rem 1.5rem;padding-top:5rem;text-align:center;}
+  .hero-img-wrap{order:-1;}
+  .img-frame{width:240px;height:300px;}
+  .hero-btns{justify-content:center;}
+  .hero::before{display:none;}
+  .hero-line{display:none;}
+  .scroll-cue{display:none;}
+  .band{padding:3rem 1.5rem;}
+  .band-inner{grid-template-columns:1fr;gap:2.5rem;}
+  .skills-section{padding:3rem 1.5rem;}
+}
+</style>
+</head>
+<body data-page="home">
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">Mohammad <span>Ahsan</span></a>
+  <button class="hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="index.html" data-page="home">Home</a></li>
+    <li><a href="pages/about.html" data-page="about">About</a></li>
+    <li><a href="pages/projects.html" data-page="projects">Projects</a></li>
+    <li><a href="pages/skills.html" data-page="skills">Skills</a></li>
+    <li><a href="pages/certificates.html" data-page="certificates">Certificates</a></li>
+    <li><a href="pages/resume.html" data-page="resume">Resume</a></li>
+    <li><a href="pages/contact.html" data-page="contact">Contact</a></li>
+  </ul>
+  <a href="pages/contact.html" class="nav-cta">Hire Me</a>
+</nav>
+
+<main class="page">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-line"></div>
+
+    <div class="hero-text"><!--
+      <p class="hero-greeting">&#8212;</p>-->
+      <h1 class="hero-name">
+        Mohammad<br>
+        <span class="italic">Ahsan</span><br>
+        Ansari
+      </h1>
+      <p class="hero-role">
+        <strong>Python Developer</strong> &amp; <strong>Data Analyst</strong><br>
+        MCA Student · Django · Machine Learning · Tableau
+      </p>
+      <div class="hero-btns">
+        <a href="pages/projects.html" class="btn"><span>View Projects &#8594;</span></a>
+        <a href="pages/resume.html" class="btn btn-solid"><span>Download CV</span></a>
+      </div>
+    </div>
+
+    <div class="hero-img-wrap">
+      <div class="img-orbit"></div>
+      <div class="img-frame">
+        <img src="PHOTO.jpg" alt="" style="border-radius: 20%;">
+      </div>
+      <div class="img-badge">Python<br>&amp;<br>Data</div>
+    </div>
+
+    <div class="scroll-cue">
+      <span>   </span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT BAND ═══ -->
+  <section class="band">
+    <div class="band-inner">
+      <div class="band-text">
+        <span class="eyebrow reveal">// About me</span>
+        <h2 class="section-title reveal d1" style="margin-bottom:1.2rem;">
+          Turning Data<br>into <em style="font-style:italic;color:var(--gold2);">Decisions</em>
+        </h2>
+        <div class="rule reveal d2"></div>
+        <p class="reveal d2">Motivated Python Developer and Data Analyst pursuing MCA at K.M.C.L.U., Lucknow. I specialize in machine learning workflows, data visualization, and backend API development.</p>
+        <p class="reveal d3">Certified Full Stack Developer with hands-on experience across the entire data science pipeline — from raw data ingestion to actionable visual insights using Tableau, Matplotlib, and Excel.</p>
+        <div class="reveal d4" style="margin-top:2rem;">
+          <a href="pages/about.html" class="btn"><span>More About Me</span></a>
+        </div>
+      </div>
+      <div class="stats-row reveal d2">
+        <div class="stat-box">
+          <div class="stat-num" data-count="4">4+</div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="10">10+</div>
+          <div class="stat-label">Technologies</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="8">8+</div>
+          <div class="stat-label">Certificates</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="2">2</div>
+          <div class="stat-label">Years Coding</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS PREVIEW ═══ -->
+  <section class="skills-section">
+    <div class="skills-section-inner">
+      <span class="eyebrow reveal">// Core Skills</span>
+      <h2 class="section-title reveal d1">Tech I Work With</h2>
+      <div class="pills-grid">
+        <div class="pill reveal d1"><span class="pill-dot"></span>Python</div>
+        <div class="pill reveal d1"><span class="pill-dot"></span>Django &amp; DRF</div>
+        <div class="pill reveal d2"><span class="pill-dot"></span>Pandas &amp; NumPy</div>
+        <div class="pill reveal d2"><span class="pill-dot"></span>Matplotlib</div>
+        <div class="pill reveal d3"><span class="pill-dot"></span>MySQL / SQLite</div>
+        <div class="pill reveal d3"><span class="pill-dot"></span>Tableau</div>
+        <div class="pill reveal d4"><span class="pill-dot"></span>Machine Learning</div>
+        <div class="pill reveal d4"><span class="pill-dot"></span>Flask</div>
+        <div class="pill reveal d5"><span class="pill-dot"></span>HTML &amp; CSS</div>
+        <div class="pill reveal d5"><span class="pill-dot"></span>Git / GitHub</div>
+      </div>
+      <div class="reveal d3" style="margin-top:2.5rem;text-align:center;">
+        <a href="pages/skills.html" class="btn"><span>Full Skill Set &#8594;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CERTIFICATES PREVIEW ═══ -->
+  <section class="skills-section">
+    <div class="skills-section-inner"><!--
+      <span class="eyebrow reveal"></span>-->
+      <h2 class="section-title reveal d1">Certifications &amp; Achievements</h2>
+      <div class="pills-grid">
+        <div class="pill reveal d1"><span class="pill-dot"></span>Full Stack Python — JAIN University</div>
+        <div class="pill reveal d1"><span class="pill-dot"></span>Tableau — JAIN University</div>
+        <div class="pill reveal d2"><span class="pill-dot"></span>Advanced Excel — Davi Infotech</div>
+        <div class="pill reveal d2"><span class="pill-dot"></span>ChatGPT Advanced — Simplilearn</div>
+        <div class="pill reveal d3"><span class="pill-dot"></span>WordPress — Davi Infotech</div>
+        <div class="pill reveal d3"><span class="pill-dot"></span>Full Stack + AI — Digipodium</div>
+        <div class="pill reveal d4"><span class="pill-dot"></span>Photography Winner — Davi Infotech</div>
+        <div class="pill reveal d4"><span class="pill-dot"></span>VBYLD 2026 — MYBharat</div>
+      </div>
+      <div class="reveal d3" style="margin-top:2.5rem;text-align:center;">
+        <a href="pages/certificates.html" class="btn"><span>View All Certificates &#8594;</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>&copy; 2024 Mohammad Ahsan Ansari &mdash; Lucknow, UP</span>
+  <div class="footer-links">
+    <a href="pages/about.html">About</a>
+    <a href="pages/projects.html">Projects</a>
+    <a href="pages/certificates.html">Certificates</a>
+    <a href="pages/contact.html">Contact</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
